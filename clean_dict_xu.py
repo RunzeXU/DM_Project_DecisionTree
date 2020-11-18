@@ -9,12 +9,14 @@ def clean_data(path):
             for i in range(len(value)):
                 if i == len(value)-2:
                     continue
+
                 if i == len(value)-1:
                     if value[i] == '<=50K':
                         temp.append('0')
                     else:
                         temp.append('1')
                     continue
+
                 temp.append(value[i])
             data.append(temp)
             line = f.readline()
@@ -43,6 +45,7 @@ col_labels = ['age', 'workclass', 'fnlwgt', 'education', 'education_num', 'marit
 
 
 
+
 print(len(train[0]))
 print(train[0])
 x = train[0]
@@ -55,6 +58,8 @@ print(dict(conbine))
 for line in train:
     conbine_label = zip(col_labels, line)
     print(dict(conbine_label))
+
     
+
 
 # print(type(train[0]))
