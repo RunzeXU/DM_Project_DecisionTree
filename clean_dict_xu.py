@@ -23,19 +23,17 @@ def clean_data(path):
 
     for index, line in enumerate(data):
         for item in line:
-            if item == '?':
+            if item == '?' or index == len(data)-1:
                 del data[index]
                 continue
-            # del line[len(line)-2]
 
-    print(len(data))
     f.close()
 
     return data
 
 
-train_path = 'adult.data'
-test_path = 'adult.test'
+train_path = 'data/adult.data'
+test_path = 'data/adult.test'
 train = clean_data(train_path)
 test = clean_data(test_path)
 
@@ -44,22 +42,7 @@ col_labels = ['age', 'workclass', 'fnlwgt', 'education', 'education_num', 'marit
               'hours_per_week', 'wage_class']
 
 
-
-
-print(len(train[0]))
-print(train[0])
-x = train[0]
-print (x[1])
-list_account = x.count('Male')
-print(list_account)
-conbine = zip(col_labels,x)
-print(dict(conbine))
-
 for line in train:
     conbine_label = zip(col_labels, line)
     print(dict(conbine_label))
 
-    
-
-
-# print(type(train[0]))
