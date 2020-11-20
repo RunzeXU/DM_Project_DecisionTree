@@ -61,16 +61,16 @@ class DecisionTree:
 
     def classify(self, input):
         current_node = self.root
-        while(not current_node.label):
+        while not current_node.label:
 
-            if(isinstance(current_node.condition,int)):
-                if (input[current_node.index] < current_node.condition):
+            if isinstance(current_node.condition, int):
+                if input[current_node.index] < current_node.condition:
                     current_node = current_node.left_node
                 else:
                     current_node = current_node.right_node
 
             else:
-                if (input[current_node.index] == current_node.condition):
+                if input[current_node.index] == current_node.condition:
                     current_node = current_node.left_node
                 else:
                     current_node = current_node.right_node
