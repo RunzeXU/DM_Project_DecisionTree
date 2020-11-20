@@ -1,5 +1,6 @@
 class node:
-    def __init__(self, index=None, condition=None, left_node=None, right_node=None):
+    def __init__(self, label=None, index=None, condition=None, left_node=None, right_node=None):
+        self.label = label
         self.index = index
         self.condition = condition
         self.left_node = left_node
@@ -46,7 +47,7 @@ class DecisionTree:
     def split_with_index(self, sub_set, attribute_index,):
         # using dictionary
         # for(condition)
-        a, b = sub_set#
+        a, b = sub_set
         condition = None
         gini_value = 0
         return [a, b], condition, gini_value
@@ -59,8 +60,22 @@ class DecisionTree:
         return err_s
 
     def classify(self, input):
-        label = 0
-        return label
+        current_node = self.root
+        while(not current_node.label):
+
+            if(isinstance(current_node.condition,int)):
+                if (input[current_node.index] < current_node.condition):
+                    current_node = current_node.left_node
+                else:
+                    current_node = current_node.right_node
+
+            else:
+                if (input[current_node.index] == current_node.condition):
+                    current_node = current_node.left_node
+                else:
+                    current_node = current_node.right_node
+
+        return current_node.label
 
     # calculate the Gini index for a split dataset
     def get_gini_index(self, groups, classes):
