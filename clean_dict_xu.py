@@ -18,23 +18,15 @@ def clean_data(path):
                     continue
 
                 temp.append(value[i])
-            data.append(temp)
+            if '?' not in temp:
+                data.append(temp)
             line = f.readline()
 
-    print(len(data))
     for index, line in enumerate(data):
         for item in line:
             if item == '?' or index == len(data)-1:
                 del data[index]
                 continue
-    print(len(data))
-
-    for index, line in enumerate(data):
-        for item in line:
-            if item == '?' or index == len(data)-1:
-                del data[index]
-                continue
-    print(len(data))
 
     f.close()
 
@@ -53,5 +45,6 @@ col_labels = ['age', 'workclass', 'fnlwgt', 'education', 'education_num', 'marit
 
 for line in train:
     conbine_label = zip(col_labels, line)
-    # print(dict(conbine_label))
+    print(dict(conbine_label))
+print(len(train))
 
