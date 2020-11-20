@@ -16,9 +16,7 @@ class DecisionTree:
 
     def recurrent_split(self, sub_set):
 
-        # stop split
-        #   all sub' attributes are the same or
-        #   all sub' labels are the same
+        # stop split, all sub_set labels are the same
         current_label = sub_set[0][-1]  # subset label
         flag = 0
         for record in sub_set:
@@ -27,13 +25,41 @@ class DecisionTree:
                 break
             else:
                 continue
-
         if flag == 0:
             return node(label=current_label), 0
 
+        # stop split, all sub_attributes are the same
+        # for i in self.num_attribute:
+        #     for record in sub_set[][]
+        flag_1 = 0
+        # self.num_attribute = len(sub_set[0]) - 1
+        for i in range(1, len(sub_set)):
+            for j in range(self.num_attribute):
+                print(i, j)
+                if sub_set[i][j] != sub_set[i - 1][j]:
+
+                    flag_1 = 1
+                    break
+                else:
+                    continue
+
+        if flag_1 == 0:
+            dict = {}
+            for record in sub_set:
+                if record[-1] not in dict.keys():
+                    dict[record[-1]] = 1
+                else:
+                    dict[record[-1]] += 1
+            value_list = list(dict.values())
+
+            key = list(dict.keys())[value_list.index(max(value_list))]
+
+            err = len(sub_set) - max(dict.values())
+
+            return node(label=key), err
 
         # split
-        best_gini = 1
+        best_gini = 0.5
         best_split = None
         best_condition = None
         index = None
