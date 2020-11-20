@@ -1,3 +1,5 @@
+discrete_index = [1, 3, 4, 5, 6, 7, 8]
+
 class node:
     def __init__(self, label=None, index=None, condition=None, left_node=None, right_node=None):
         self.label = label
@@ -78,14 +80,52 @@ class DecisionTree:
 
         return node(index, a, b, best_condition), a_err + b_err
 
-    # find in what condition is the
-    def split_with_index(self, sub_set, attribute_index, ):
-        # using dictionary
-        # for(condition)
-        a, b = sub_set
-        condition = None
-        gini_value = 0
-        return [a, b], condition, gini_value
+    def split_with_index(self, sub_set, attribute_index):
+        value = []
+        best_gini = 1
+        best_condition = None
+        subset_left = []
+        subset_right = []
+
+        for element in sub_set:
+            if element[attribute_index] not in value:
+                value.append(element[attribute_index])
+        num_attributes = len(value)
+
+        for index in range(num_attributes):
+
+            left_pos, left_neg, right_pos, right_neg = 0
+            left = []
+            right = []
+            condition = value[index]
+
+            if attribute_index in discrete_index:
+                for i, data in enumerate(sub_set):
+                    if data == condition:
+                        left.append(data)
+                        if data[-1] == 1:
+                            left_pos += 1
+                        else:
+                            left_neg += 1
+                    else:
+                        right.append(data)
+                        if data[-1] == 1:
+                            right_pos += 1
+                        else:
+                            right_neg += 1
+                temp_gini = self.get_gini_index([[[1, left_pos], [1, left_neg]], [[1, right_pos], [1, right_neg]]],
+                                                [0, 1])
+
+                if temp_gini < best_gini:
+                    best_gini = temp_gini
+                    subset_left = left
+                    subset_right = right
+                    best_condition = condition
+            else:
+                continue
+                # todo: continuous attribute
+
+        return [subset_left, subset_right], best_condition, best_gini
 
     def build_tree(self, train_set):
         self.num_object = len(self.train_set)
