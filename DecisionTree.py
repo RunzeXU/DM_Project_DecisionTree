@@ -103,13 +103,13 @@ class DecisionTree:
                 for i, data in enumerate(sub_set):
                     if data == condition:
                         left.append(data)
-                        if data[-1] == 1:
+                        if data[-1] == '1':
                             left_pos += 1
                         else:
                             left_neg += 1
                     else:
                         right.append(data)
-                        if data[-1] == 1:
+                        if data[-1] == '1':
                             right_pos += 1
                         else:
                             right_neg += 1
