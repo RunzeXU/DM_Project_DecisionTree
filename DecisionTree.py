@@ -14,14 +14,23 @@ class DecisionTree:
         self.num_object = 0
         self.num_attribute = 0
 
-    def recurrent_split(sub_set):
+    def recurrent_split(self, sub_set):
 
         # stop split
         #   all sub' attributes are the same or
         #   all sub' labels are the same
-        if 1:
-            err = 0
-            return node(), err
+        current_label = sub_set[0][-1]  # subset label
+        flag = 0
+        for record in sub_set:
+            if record[-1] != current_label:
+                flag = 1
+                break
+            else:
+                continue
+
+        if flag == 0:
+            return node(label=current_label), 0
+
 
         # split
         best_gini = 1
@@ -30,7 +39,7 @@ class DecisionTree:
         index = None
         for i in range(self.num_attribute):
 
-            current_split, current_condition, current_gini = split_with_index(sub_set, i)
+            current_split, current_condition, current_gini = self.split_with_index(sub_set, i)
 
             if current_gini < best_gini:
                 best_gini = current_gini
@@ -44,7 +53,7 @@ class DecisionTree:
         return node(index, a, b, best_condition), a_err + b_err
 
     # find in what condition is the
-    def split_with_index(self, sub_set, attribute_index,):
+    def split_with_index(self, sub_set, attribute_index, ):
         # using dictionary
         # for(condition)
         a, b = sub_set
@@ -93,10 +102,8 @@ class DecisionTree:
             # score the group based on the score for each class
             for class_val in classes:
                 p = [row[-1] for row in group].count(class_val) / size
-                score += p*p
+                score += p * p
             # weight the group score by its relative size
             gini += (1.0 - score) * (size / num_instances)
 
         return gini
-
-
