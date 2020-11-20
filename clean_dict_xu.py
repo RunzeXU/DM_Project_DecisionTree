@@ -1,8 +1,8 @@
 def clean_data(path):
     data = []
     with open(path, 'r') as f:
-        line = f.readline()
-        while line:
+        lines = f.readlines()
+        for index, line in enumerate(lines):
             temp = []
             line = line.strip()
             value = line.split(', ')
@@ -18,15 +18,8 @@ def clean_data(path):
                     continue
 
                 temp.append(value[i])
-            if '?' not in temp:
+            if '?' not in temp and index != len(lines)-1:
                 data.append(temp)
-            line = f.readline()
-
-    for index, line in enumerate(data):
-        for item in line:
-            if item == '?' or index == len(data)-1:
-                del data[index]
-                continue
 
     f.close()
 
