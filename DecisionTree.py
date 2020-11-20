@@ -8,10 +8,10 @@ class node:
 
 class DecisionTree:
 
-    def __init__(self, root):
+    def __init__(self):
         self.root = None
         self.num_object = 0
-        self.num_attribut = 0
+        self.num_attribute = 0
 
     def recurrent_split(sub_set):
 
@@ -27,7 +27,7 @@ class DecisionTree:
         best_split = None
         best_condition = None
         index = None
-        for i in range(self.num_attribut):
+        for i in range(self.num_attribute):
 
             current_split, current_condition, current_gini = split_with_index(sub_set, i)
 
@@ -53,7 +53,7 @@ class DecisionTree:
 
     def build_tree(self, train_set):
         self.num_object = len(self.train_set)
-        self.num_attribut = len(train_set[0]) - 1
+        self.num_attribute = len(train_set[0]) - 1
         self.root, err_object = self.recurrent_split(train_set)
         err_s = err_object / self.num_object
         return err_s
@@ -62,6 +62,26 @@ class DecisionTree:
         label = 0
         return label
 
-    def gini(self, indexs):
-        gini_value = 0
-        return gini_value
+    # calculate the Gini index for a split dataset
+    def get_gini_index(self, groups, classes):
+        # count all samples at split point
+        num_instances = float(sum([len(group) for group in groups]))
+
+        # sum weighted Gini index for each group
+        gini = 0.0
+        for group in groups:
+            size = float(len(group))
+            # avoid divided by zero
+            if size == 0:
+                continue
+            score = 0.0
+            # score the group based on the score for each class
+            for class_val in classes:
+                p = [row[-1] for row in group].count(class_val) / size
+                score += p*p
+            # weight the group score by its relative size
+            gini += (1.0 - score) * (size / num_instances)
+
+        return gini
+
+

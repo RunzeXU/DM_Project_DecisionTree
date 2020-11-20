@@ -37,7 +37,7 @@ col_labels = ['age', 'workclass', 'fnlwgt', 'education', 'education_num', 'marit
 
 
 for line in train:
-    conbine_label = zip(col_labels, line)
-    print(dict(conbine_label))
+    combine_label = zip(col_labels, line)
+    print(dict(combine_label))
 print(len(train))
 
