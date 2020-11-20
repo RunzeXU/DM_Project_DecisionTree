@@ -21,7 +21,7 @@ def clean_data(path):
             # del line[len(line)-2]
 
     print(len(data))
-    f.close()
+    # f.close()
 
     return data
 
@@ -31,7 +31,5 @@ test_path = './data/adult.test'
 train = clean_data(train_path)
 test = clean_data(test_path)
 
-
-print(len(train))
-print(train[0])
-# print(type(train[0]))
+# for line in train:
+#     print(line)
