@@ -14,6 +14,7 @@ DT = DecisionTree(15)
 # print(currentnode.get_info())
 # print(DT.classify([3, 'c']))
 
+
 train_path = 'data/adult.data'
 test_path = 'data/adult.test'
 
