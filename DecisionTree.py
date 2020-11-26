@@ -5,12 +5,14 @@ class node:
         self.condition = condition
         self.left_node = left_node
         self.right_node = right_node
+
     def get_info(self):
-        print("label: ", self.label," index: ", self.index,"condition: ", self.condition)
+        print("label: ", self.label, " index: ", self.index, "condition: ", self.condition)
 
 
-def consider_element(element,i):
+def consider_element(element, i):
     return element[i]
+
 
 class DecisionTree:
 
@@ -115,9 +117,9 @@ class DecisionTree:
 
             sub_set = sorted(sub_set, key=lambda x: x[attribute_index])
 
-            for i in range(1,len(sub_set)):
+            for i in range(1, len(sub_set)):
 
-                if sub_set[i][attribute_index] == sub_set[i-1][attribute_index]:
+                if sub_set[i][attribute_index] == sub_set[i - 1][attribute_index]:
                     continue
                 else:
                     temp_gini = self.get_gini_index([sub_set[:i], sub_set[i:]])
@@ -178,12 +180,12 @@ class DecisionTree:
             gini += (1.0 - score) * (size / num_instances)
         return gini
 
-    def print_tree(self, node = None, layer = None):
+    def print_tree(self, node=None, layer=None):
         current_node = node
         if not node:
             layer = 1
             current_node = self.root
-            print("-----------this is layer :",layer)
+            print("-----------this is layer :", layer)
             current_node.get_info()
             print("--------------------------------")
         else:
@@ -191,6 +193,6 @@ class DecisionTree:
             current_node.get_info()
             print("--------------------------------")
 
-        if(current_node.label == None):
+        if (current_node.label == None):
             self.print_tree(current_node.left_node, layer + 1)
             self.print_tree(current_node.right_node, layer + 1)
