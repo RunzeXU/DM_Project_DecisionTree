@@ -30,18 +30,18 @@ def clean_data(path):
     return data
 
 
-train_path = 'data/adult.data'
-test_path = 'data/adult.test'
-train = clean_data(train_path)
-test = clean_data(test_path)
-
-col_labels = ['age', 'workclass', 'fnlwgt', 'education', 'education_num', 'marital_status',
-              'occupation', 'relationship', 'race', 'sex', 'capital_gain', 'capital_loss',
-              'hours_per_week', 'wage_class']
-
-
-for line in train:
-    combine_label = zip(col_labels, line)
-    print(dict(combine_label))
-print(len(train))
+# train_path = 'data/adult.data'
+# test_path = 'data/adult.test'
+# train = clean_data(train_path)
+# test = clean_data(test_path)
+#
+# col_labels = ['age', 'workclass', 'fnlwgt', 'education', 'education_num', 'marital_status',
+#               'occupation', 'relationship', 'race', 'sex', 'capital_gain', 'capital_loss',
+#               'hours_per_week', 'wage_class']
+#
+#
+# for line in train:
+#     combine_label = zip(col_labels, line)
+#     print(dict(combine_label))
+# print(len(train))
 
