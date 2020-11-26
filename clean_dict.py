@@ -1,9 +1,11 @@
-def clean_data(path):
+def clean_data(path, test):
     data = []
-    index = 0
+    # index = 0
     with open(path, 'r') as f:
         lines = f.readlines()
         for index, line in enumerate(lines):
+            if test:
+                continue
             temp = []
             line = line.strip()
             value = line.split(', ')
@@ -12,11 +14,18 @@ def clean_data(path):
                     continue
 
                 if i == len(value)-1:
-                    if value[i] == '<=50K':
-                        temp.append('0')
+                    if test:
+                        if value[i] == '<=50K.':
+                            temp.append('0')
+                        else:
+                            temp.append('1')
+                        continue
                     else:
-                        temp.append('1')
-                    continue
+                        if value[i] == '<=50K':
+                            temp.append('0')
+                        else:
+                            temp.append('1')
+                        continue
 
                 if i == len(value) - 3 or i == len(value) - 4 or i == len(value) - 5 or i == len(
                         value) - 11 or i == len(value) - 13 or i == len(value) - 15:
@@ -25,9 +34,9 @@ def clean_data(path):
                 temp.append(value[i])
             if '?' not in temp and index != len(lines)-1:
                 data.append(temp)
-            index += 1
-            if index >= 3000:
-                break
+            # index += 1
+            # if index >= 3000:
+            #     break
 
     f.close()
 
@@ -48,4 +57,3 @@ def clean_data(path):
 #     combine_label = zip(col_labels, line)
 #     print(dict(combine_label))
 # print(len(train))
-
