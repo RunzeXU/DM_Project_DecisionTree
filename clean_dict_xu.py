@@ -17,6 +17,10 @@ def clean_data(path):
                         temp.append('1')
                     continue
 
+                if i == len(value) - 3 or i == len(value) - 4 or i == len(value) - 5 or i == len(
+                        value) - 11 or i == len(value) - 13 or i == len(value) - 15:
+                    temp.append(int(value[i]))
+                    continue
                 temp.append(value[i])
             if '?' not in temp and index != len(lines)-1:
                 data.append(temp)
