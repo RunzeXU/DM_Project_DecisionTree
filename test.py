@@ -1,5 +1,5 @@
 from DecisionTree import *
-from clean_dict_xu import *
+from clean_dict import *
 
 DT = DecisionTree()
 
@@ -19,14 +19,17 @@ test_path = 'data/adult.test'
 
 train = clean_data(train_path)
 test = clean_data(test_path)
-print(DT.build_tree(train))
+# print(DT.build_tree(train))
+#
+# correct = 0
+# num_data = 0
+# for data in test:
+#     num_data += 1
+#     predict_label = DT.classify(data)
+#     if predict_label == test[-1]:
+#         correct += 1
+# print(float(correct) / num_data)
+# DT.print_tree()
 
-correct = 0
-num_data = 0
-for data in test:
-    num_data += 1
-    predict_label = DT.classify(data)
-    if predict_label == test[-1]:
-        correct += 1
-print(float(correct) / num_data)
-DT.print_tree()
+for i in train:
+    print(i[-1])
