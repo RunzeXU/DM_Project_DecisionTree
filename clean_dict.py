@@ -4,7 +4,7 @@ def clean_data(path, test):
     with open(path, 'r') as f:
         lines = f.readlines()
         for index, line in enumerate(lines):
-            if test:
+            if test and index == 0:
                 continue
             temp = []
             line = line.strip()
