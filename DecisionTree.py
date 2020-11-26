@@ -16,7 +16,8 @@ def consider_element(element, i):
 
 class DecisionTree:
 
-    def __init__(self):
+    def __init__(self, small_factor=-1):
+        self.small_factor = small_factor
         self.root = None
         self.num_object = 0
         self.num_attribute = 0
@@ -49,6 +50,10 @@ class DecisionTree:
                     break
                 else:
                     continue
+
+        if self.small_factor != -1:
+            if len(sub_set) <= self.small_factor:
+                flag_1 = 0
 
         if flag_1 == 0:
             dict = {}
