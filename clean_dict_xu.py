@@ -1,5 +1,6 @@
 def clean_data(path):
     data = []
+    index = 0
     with open(path, 'r') as f:
         lines = f.readlines()
         for index, line in enumerate(lines):
@@ -24,6 +25,9 @@ def clean_data(path):
                 temp.append(value[i])
             if '?' not in temp and index != len(lines)-1:
                 data.append(temp)
+            index += 1
+            if index >= 3000:
+                break
 
     f.close()
 
